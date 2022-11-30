@@ -127,8 +127,8 @@ const ModalLogin = () => {
       const result = await fetch("http://localhost:3500/api/login", requestOptions)
       if(![200,201].includes(result.status)) return false 
       const data = await result.json()
-
-      window.sessionStorage.setItem("user_data", JSON.stringify(data.data_user))
+      console.log(data,'========');
+      // window.sessionStorage.setItem("user_data", JSON.stringify(data.data_user))
 
       dispath(handleOpenModalLogin(false))
       dispath(handleLogin(true))

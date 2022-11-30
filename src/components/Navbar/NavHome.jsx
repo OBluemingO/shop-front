@@ -51,7 +51,7 @@ export const NavHome = () => {
 
   useEffect(() => {
     const data_username = window.sessionStorage.getItem("user_data")
-    if(data_username === null || data_username === undefined) return 
+    if(data_username === null || data_username === undefined || data_username === 'undefined') return 
     setDataUser(JSON.parse(data_username))
     dispath(handleLogin(true))
   }, [auth.isLogin])
