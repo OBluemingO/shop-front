@@ -3,7 +3,7 @@ import ModalLogin from "./components/Modal/ModalLogin"
 import { NavHome } from "./components/Navbar/NavHome"
 import { GlobalStyled } from "./Globalstyled"
 import Home from "./pages/Home"
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Profile from "./pages/Profile"
 
 const Container = styled.div`
