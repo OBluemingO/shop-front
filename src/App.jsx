@@ -6,7 +6,8 @@ import Home from "./pages/Home"
 
 const Container = styled.div`
   /* background-color: black; */
-  max-width: 1440px;
+  /* max-width: 1440px; */
+  /* overflow-x: hidden; */
   height: 100vh;
   margin: 0 auto;
 

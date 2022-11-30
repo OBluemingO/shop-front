@@ -69,7 +69,12 @@ const ModalLogin = () => {
   const {auth} = useSelector(state => state)
   const dispath = useDispatch()
   const modalRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
 
+  const handleSubmitLogin = () => {
+    console.log(emailRef.current.value,'==========',passwordRef.current.value)
+  }
   
   useEffect(() => {
 
@@ -95,13 +100,13 @@ const ModalLogin = () => {
         </ImageLogin>
         <WrapperInput >
           <Label htmlFor="fname"> Email : {''}
-            <Input type={'email'} />
+            <Input ref={emailRef} type={'email'} />
           </Label>
           <Label htmlFor="fname"> password :{' '}
-            <Input type={'password'} />
+            <Input ref={passwordRef} type={'password'} />
           </Label>
           <WrapperButton>
-            <Button>login</Button>
+            <Button onClick={handleSubmitLogin}>login</Button>
             <Button>cancel</Button>
           </WrapperButton>
           <Button>sign up</Button>
