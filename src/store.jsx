@@ -10,4 +10,5 @@ export const store = configureStore({
     // modal: modalReducer,
   },
   // middleware: middleWares,
+  devTools: true
 });
