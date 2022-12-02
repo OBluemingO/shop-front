@@ -2,10 +2,13 @@ import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { json, Link, Navigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+
 import {
   handleOpenModalLogin,
   handleLogin,
 } from "../../feature/auth/authSlice";
+
 import axios from '../../axios/axios'
 
 const Container = styled.div`
@@ -133,6 +136,12 @@ const Input = styled.input`
   outline: none;
   border: none;
   width: ${({ check }) => !check && `80%`};
+
+  ::placeholder{
+    ${({dataError}) => dataError && css`
+      color: red;
+    `}
+  }
 `;
 
 const Label = styled.label`
@@ -183,6 +192,7 @@ const Button = styled.button`
 
 const ModalLogin = () => {
   const { auth } = useSelector((state) => state);
+  const [dataError, setDataError] = useState(false)
   const dispath = useDispatch();
   const usernameRef = useRef(null)
   const passwordRef = useRef(null)
@@ -215,19 +225,28 @@ const ModalLogin = () => {
     return () => clearTimeout(delay);
   }, [auth.modalLogin]);
 
+  useEffect(() => {
+    if(dataError){
+      usernameRef.current.value = ''
+      passwordRef.current.value = ''
+    }
+  }, [ dataError ])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('asd')
     if(usernameRef.current.value === '' || passwordRef.current.value === '') return
-    console.log(usernameRef.current.value,'=======', passwordRef.current.value)
     try {
         const { data } = await axios.post("auth", {
           email: usernameRef.current.value,
           password: passwordRef.current.value,
-        });
-        console.log(data,'===');
+          }, { withCredentials: true }
+        )
+        window.localStorage.setItem('username', data.username )
+        dispath(handleOpenModalLogin(false))
     } catch (err) {
-      console.log(err, "==== err");
+      if(Object.keys(err.response.data).length > 0){
+        setDataError(true)
+      }
     }
 
   };
@@ -252,11 +271,11 @@ const ModalLogin = () => {
               <WrapperInputContent>
                 <label htmlFor="email">Email</label>
                 <WrapperInput>
-                  <Input ref={usernameRef} type={'text'} placeholder="Enter your email address" />
+                  <Input ref={usernameRef} type={'text'} onClick={() => setDataError(false)} dataError={dataError} placeholder={dataError ? `info wrong`: `Enter your email address` } />
                 </WrapperInput>
                 <label htmlFor="password">Password</label>
                 <WrapperInput>
-                  <Input ref={passwordRef} type={"password"} placeholder="Enter your password" />
+                  <Input ref={passwordRef} type={"password"} onClick={() => setDataError(false)} dataError={dataError} placeholder={dataError ? `info wrong`: `Enter your password` } />
                 </WrapperInput>
                 <WrapperOption>
                   <WrapperCheck>

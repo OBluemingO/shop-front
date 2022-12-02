@@ -4,7 +4,8 @@ import { useSelector, useDispatch } from "react-redux/es/exports";
 import { handleLogin, handleOpenModalLogin } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { RiArrowDropDownLine } from "react-icons/ri";
+import PopupMenu from "../Popup/PopupMenu";
 
 const WrapperMenu = styled.div`
   display: flex;
@@ -39,10 +40,22 @@ const ListMenu = styled.div`
   color: ${({firstWord}) => firstWord ? `var(--text-gray)`:`var(--text-gray-less)`};
 `;
 
+const DropDownName = styled.div`
+  /* background-color: black; */
+  width: 15%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+  position: relative;
+`
+
 export const NavHome = () => {
   const menu_list = [`Home`, `How It Work`, `Features`, `Pricing`, `FAQs`];
   const { auth } = useSelector(state => state)
   const [dataUser, setDataUser] = useState(null)
+  const [dropDown, setDropDown] = useState(false)
   const dispath = useDispatch()
 
   const handleClickModal = () => {
@@ -50,12 +63,17 @@ export const NavHome = () => {
   }
 
   useEffect(() => {
-    const data_username = window.sessionStorage.getItem("user_data")
-    if(data_username === null || data_username === undefined || data_username === 'undefined') return 
-    setDataUser(JSON.parse(data_username))
-    dispath(handleLogin(true))
-  }, [auth.isLogin])
+    try{
+      const data_username = window.localStorage.getItem("username")
+      setDataUser(data_username)
+      dispath(handleLogin(true))
+    }
+    catch(err) {
+      throw err
+    }
+  }, [auth.modalLogin])
 
+  console.log(dataUser)
   return (
     <WrapperMenu>
       <GroupsMenu>
@@ -69,8 +87,13 @@ export const NavHome = () => {
           }
       </GroupsMenu>
       {
-      auth.isLogin && dataUser?.username ? `${dataUser.username}`: 
-      <ButtonRound bgColor={`true`} height={'90%'} callBackClick={() => handleClickModal()} >Sign in </ButtonRound>
+        dataUser ?
+        <DropDownName onClick={() => setDropDown(prev => !prev)}>
+          {dataUser} <RiArrowDropDownLine style={{ cursor: 'pointer' }} />
+          <PopupMenu drop={dropDown} />
+        </DropDownName>
+        : 
+        <ButtonRound bgColor={`true`} height={'90%'} callBackClick={() => handleClickModal()} >Sign in </ButtonRound>
       }
     </WrapperMenu>
   );
