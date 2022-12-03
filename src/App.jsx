@@ -11,29 +11,12 @@ import { useEffect } from "react"
 const Container = styled.div`
   /* background-color: black; */
   max-width: 1440px;
-  /* overflow-x: hidden; */
   height: 100vh;
   margin: 0 auto;
 
 `
 
 function App() {
-  
-  // useEffect(() => {
-  //   const fetch_api = async () => {
-  //     try{
-  //       const { data } = await axios.post('auth',{
-  //         email:'admin',
-  //         password:'admin'
-  //       })
-  //     }
-  //     catch(err){
-  //       console.log(err,'==== err')
-  //     }
-  //   }
-
-  //   fetch_api()
-  // }, [])
   
   return (
     <BrowserRouter>

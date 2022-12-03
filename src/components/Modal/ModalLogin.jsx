@@ -26,6 +26,7 @@ const Container = styled.div`
 `;
 
 const Borad = styled.div`
+  max-width: 1440px;
   height: 80%;
   width: 80%;
   background-color: white;
@@ -41,7 +42,7 @@ const Borad = styled.div`
 const BackgroundBorad = styled.div`
   position: absolute;
   background-color: black;
-  height: 150%;
+  height: 120%;
   width: 120%;
   rotate: 80deg;
   transform: ${({ active }) =>
