@@ -5,7 +5,9 @@ import { useState } from "react";
 import {
   HomeSectionOne,
   HomeSectionDuplicate,
-  HomeSectionThird
+  HomeSectionThird,
+  HomeSectionFour,
+  HomeSectionFive
 } from '../components/Section/index.jsx'
 
 const Home = () => {
@@ -15,6 +17,9 @@ const Home = () => {
       <HomeSectionOne />
       <HomeSectionDuplicate />
       <HomeSectionThird />
+      <HomeSectionDuplicate />
+      <HomeSectionFour />
+      <HomeSectionFive />
     </>
   );
 };

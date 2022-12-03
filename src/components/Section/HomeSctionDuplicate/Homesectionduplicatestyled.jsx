@@ -3,7 +3,6 @@ import styled from "styled-components";
 const ContainerSectionMuti = styled.div`
   height: 108vh;
   max-height: 870px;
-  /* background-color: yellow; */
   padding-top: 15%;
 `;
 
