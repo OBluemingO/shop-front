@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ButtonRound from "../Buttons/ButtonRound";
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { handleLogin, handleOpenModalLogin } from "../../feature/auth/authSlice";
+import { handleLogin, handleLogout, handleOpenModalLogin } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -56,6 +56,7 @@ export const NavHome = () => {
   const { auth } = useSelector(state => state)
   const [dataUser, setDataUser] = useState(null)
   const [dropDown, setDropDown] = useState(false)
+  const [logout, setLogout] = useState(false)
   const dispath = useDispatch()
 
   const handleClickModal = () => {
@@ -71,9 +72,18 @@ export const NavHome = () => {
     catch(err) {
       throw err
     }
-  }, [auth.modalLogin])
 
-  console.log(dataUser)
+    if(logout){
+      setDataUser(false)
+      setLogout(false)
+    }
+
+  }, [auth.modalLogin, logout])
+
+  const handleLogout = (result) => {
+    setLogout(result)
+  }
+
   return (
     <WrapperMenu>
       <GroupsMenu>
@@ -90,7 +100,7 @@ export const NavHome = () => {
         dataUser ?
         <DropDownName onClick={() => setDropDown(prev => !prev)}>
           {dataUser} <RiArrowDropDownLine style={{ cursor: 'pointer' }} />
-          <PopupMenu drop={dropDown} />
+          <PopupMenu drop={dropDown} callLogOut={(result) => handleLogout(result)} />
         </DropDownName>
         : 
         <ButtonRound bgColor={`true`} height={'90%'} callBackClick={() => handleClickModal()} >Sign in </ButtonRound>

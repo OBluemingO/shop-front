@@ -240,12 +240,13 @@ const ModalLogin = () => {
         const { data } = await axios.post("auth", {
           email: usernameRef.current.value,
           password: passwordRef.current.value,
-          }, { withCredentials: true }
+          }, 
+          { withCredentials: true }
         )
         window.localStorage.setItem('username', data.username )
         dispath(handleOpenModalLogin(false))
     } catch (err) {
-      if(Object.keys(err.response.data).length > 0){
+      if(Object.keys(err.response?.data).length > 0){
         setDataError(true)
       }
     }

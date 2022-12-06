@@ -25,20 +25,17 @@ const Menu = styled.div`
   }
 `;
 
-const PopupMenu = ({ drop }) => {
+const PopupMenu = ({ drop, callLogOut }) => {
 
-    const [cookies, setCookie, removeCookie] = useCookies(['name']);
-
-    const handleLogout = () => {
-        // console.log(document,'========= document document')
-        // const cookie = document.cookie.split(" ")[1]
-        console.log(window,'======== cookies cookies')
-        console.log(document.cookie,'======== cookies cookies')
-        // const { data } = await axios.post("auth/logout",{
-        //     cookie: cookie
-        // })
-        // window.localStorage.setItem('username', data.username )
-        // dispath(handleOpenModalLogin(false))
+    const handleLogout = async() => {
+        const { data } = await axios.post("auth/logout")
+        window.localStorage.removeItem('username')
+        callLogOut(true)
+        // document.cookie = ''
+        // console.log(data,'======== after logout')
+        const mydate = new Date();
+        mydate.setTime(mydate.getTime() - 1);
+        document.cookie = "username=; expires=" + mydate.toGMTString(); 
     }
 
     return (

@@ -7,13 +7,14 @@ const customInstance = axios.create({
     // 'Access-Control-Allow-Method': 'GET',
   },
 })
-// customInstance.interceptors.request.use((config) => {
-//   if (typeof window !== 'undefined') {
-//     const token = localStorage.getItem('access_token')
-//     config.headers.Authorization = token ? `Bearer ${token}` : ''
-//     return config
-//   }
-//   return config
-// })
+
+customInstance.interceptors.request.use((config) => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('access_token')
+    config.headers.Authorization = token ? `Bearer ${token}` : ''
+    return config
+  }
+  return config
+})
 
 export default customInstance

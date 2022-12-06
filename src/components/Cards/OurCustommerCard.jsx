@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { AiFillStar } from 'react-icons/ai'
 
 const Container = styled.div`
   width: ${({width}) => width ? `${width}` : `350px`};
@@ -25,12 +26,45 @@ const ImageSrc = styled.img`
   object-fit: cover;
 `
 
+const WrapperText = styled.div`
+  padding: 40% 10%;
+`
+
+const TextHeader = styled.h2`
+  margin: 0;
+  text-transform: capitalize;
+`
+
+const WrapperIcon = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 3.5%;
+  gap: 1.5%;
+`
+
+const Rating = styled.h2`
+  margin: 0;
+`
+
 const OurCustommerCard = ({mt}) => {
   return (
     <Container mt={mt}>
       <CircleImage>
         <ImageSrc src='https://fakeimg.pl/300/' />  
       </CircleImage>
+      <WrapperText>
+        <TextHeader>test test</TextHeader>
+        <WrapperIcon>
+          {
+            Array(3).fill(null).map((el,index) => 
+              <AiFillStar key={`star-index-${index}`} />
+            )
+          }
+        </WrapperIcon>
+        <Rating>
+          {Math.random()*100}
+        </Rating>
+      </WrapperText>
     </Container>
   )
 }
