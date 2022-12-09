@@ -12,11 +12,11 @@ import Product from "./pages/Product"
 import { useState } from "react";
 
 const Container = styled.div`
-  background-color: black;
+  /* background-color: black; */
   max-width: 1440px;
   height: 100vh;
   margin: 0 auto;
-  color: white;
+  /* color: white; */
 `
 
 function App() {

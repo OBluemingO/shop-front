@@ -6,9 +6,9 @@ import ProductCard from "../components/Cards/ProductCard";
 
 const Container = styled.div`
   padding: 0 5%;
-  height: 100%;
+  height: auto;
   display: flex;
-  gap: 1%;
+  gap: 2% 1%;
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 2.5%;
@@ -17,12 +17,13 @@ const Container = styled.div`
 const Product = () => {
   const [product, setProduct] = useState([]);
   const [endPage, setEndPage] = useState(false)
+  const [cardLimit, setCardLimit] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("products", { params: {limit: 9} } );
-        setProduct(data);
+        const { data: { card_product } } = await axios.get("products", { params: {limit: 8} } );
+        setProduct(card_product[0]);
       } catch (err) {
         console.err(err);
       }
@@ -35,8 +36,6 @@ const Product = () => {
       if(endOfPage){
         setEndPage(true)
       }
-     
-      // setEndPage(endOfPage)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -47,23 +46,25 @@ const Product = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("products", { params: { limit: product.length + 9 } } );
-        if(data.length > 30) data.pop()
-        setProduct(data);
+        console.log('keep fetch data.... ')
+        const { data: { card_product, limit } } = await axios.get("products", { params: { limit: (product.length-1) + 9 } } );
+        setProduct(card_product[0]);
+        setCardLimit(limit)
       } catch (err) {
         console.err(err);
       }
-    };
-    if(endPage){
+    }
+    
+    if(endPage && !cardLimit){
       const delayShowProductCard = setTimeout(() => {
-        fetchData();
+        fetchData()
         setEndPage(false)
       }, 750);
       
       return () => clearTimeout(delayShowProductCard)
     }
 
-  },[endPage, product])
+  },[endPage, product, cardLimit])
 
   return (
     <Container>
@@ -75,9 +76,12 @@ const Product = () => {
         : null
       }
       {
+        !cardLimit ? 
         Array(3).fill(null).map(
           (el, index) => <ProductCard loading={'true'} {...el} key={`product-card-${index}`} />
         )
+        : 
+        null
       }
     </Container>
   );
