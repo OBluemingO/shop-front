@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import styled from 'styled-components/macro'
 
 // https://vitejs.dev/config/
 export default defineConfig({

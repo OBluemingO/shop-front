@@ -4,6 +4,7 @@ const initialState = {
   modalLogin: false,
   isLogin: false,
   acc_token: null,
+  active_user: false,
 }
 
 const authSlice = createSlice({
@@ -21,6 +22,9 @@ const authSlice = createSlice({
     },
     handleLogout: (state, {payload}) => {
       state.acc_token = null
+    },
+    handleActiveUser: (state, {payload}) => {
+      state.active_user = payload
     }
   }
 })
@@ -29,7 +33,8 @@ export const {
   handleOpenModalLogin,
   handleLogin,
   handleSetCredentials,
-  handleLogout
+  handleLogout,
+  handleActiveUser
 } = authSlice.actions;
 
 export default authSlice.reducer;

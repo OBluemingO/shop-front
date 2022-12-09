@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ButtonRound from "../Buttons/ButtonRound";
 import { useSelector, useDispatch } from "react-redux/es/exports";
-import { handleLogin, handleLogout, handleOpenModalLogin } from "../../feature/auth/authSlice";
+import { handleActiveUser, handleLogin, handleLogout, handleOpenModalLogin } from "../../feature/auth/authSlice";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -74,6 +74,7 @@ export const NavHome = () => {
     }
 
     if(logout){
+      dispath(handleActiveUser(false))
       setDataUser(false)
       setLogout(false)
     }
