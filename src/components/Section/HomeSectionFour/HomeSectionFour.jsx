@@ -10,7 +10,7 @@ const HomeSectionFour = () => {
 
         <OurCustommerCard />
         <OurCustommerCard />
-        <OurCustommerCard mt={30}/>
+        <OurCustommerCard mt={29}/>
         <OurCustommerCard />
       </Element.WrapperCard>
     </Element.Container>

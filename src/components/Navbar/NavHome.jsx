@@ -41,7 +41,6 @@ const ListMenu = styled.div`
 `;
 
 const DropDownName = styled.div`
-  /* background-color: black; */
   width: 15%;
   height: 100%;
   display: flex;
@@ -52,7 +51,7 @@ const DropDownName = styled.div`
 `
 
 export const NavHome = () => {
-  const menu_list = [`Home`, `How It Work`, `Features`, `Pricing`, `FAQs`];
+  const menu_list = [`Home`,`Product`, `How It Work`, `Features`, `Pricing`, `FAQs`];
   const { auth } = useSelector(state => state)
   const [dataUser, setDataUser] = useState(null)
   const [dropDown, setDropDown] = useState(false)

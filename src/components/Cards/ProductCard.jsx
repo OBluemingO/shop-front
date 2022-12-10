@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { forwardRef } from 'react'
+import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css'
 
 const Container = styled.div`
@@ -41,16 +42,14 @@ const Text = styled.p`
   margin-top: 5%;
 `
 
-const ProductCard = ({ name, price, collection_product, loading }) => {
+const ProductCard = ({ name, price, collection_product, loading, index },ref) => {
   return (
     <>
       {loading ? (
-        <Container>
+        <Container ref={el => ref.current[index] = el}>
           <Skeleton height={250} width={250} />
           <Skeleton height={24} style={{ marginTop: 22 }} />
           <Skeleton height={20} style={{ marginTop: 10, marginBottom: 22 }} />
-            {/* <Skeleton height={14} count={3} style={{ marginTop: 4 }} />
-            <Skeleton height={21} width={80} style={{ marginTop: 14 }} /> */}
         </Container>
       ) : (
         <Container>
@@ -68,4 +67,4 @@ const ProductCard = ({ name, price, collection_product, loading }) => {
   );
 };
 
-export default ProductCard;
+export default forwardRef(ProductCard);
