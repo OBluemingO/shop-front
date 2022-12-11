@@ -61,28 +61,45 @@ export const NavHome = () => {
   const handleClickModal = () => {
     dispath(handleOpenModalLogin(true))
   }
+  
+  // useEffect(() => {
+  //   try{
+  //     // const data_username = window.localStorage.getItem("username")
+  //     // setDataUser(data_username)
+  //     // dispath(handleLogin(true))
+  //     console.log(auth.token)
+  //   }
+  //   catch(err) {
+  //     throw err
+  //   }
+
+  //   if(logout){
+  //     dispath(handleActiveUser(false))
+  //     setDataUser(false)
+  //     setLogout(false)
+  //   }
+
+  // }, [auth.modalLogin, logout])
 
   useEffect(() => {
-    try{
-      const data_username = window.localStorage.getItem("username")
-      setDataUser(data_username)
-      dispath(handleLogin(true))
+    const checkToken = async() => {
+      try{
+        // console.log(auth,'=====')
+      }
+      catch(err) {
+        console.log('first',err)
+      }
     }
-    catch(err) {
-      throw err
-    }
+    
+    checkToken()
 
-    if(logout){
-      dispath(handleActiveUser(false))
-      setDataUser(false)
-      setLogout(false)
-    }
-
-  }, [auth.modalLogin, logout])
+  },[auth, logout])
 
   const handleLogout = (result) => {
     setLogout(result)
   }
+
+  console.log(auth,'===')
 
   return (
     <WrapperMenu>
@@ -97,9 +114,9 @@ export const NavHome = () => {
           }
       </GroupsMenu>
       {
-        dataUser ?
+        auth.user ?
         <DropDownName onClick={() => setDropDown(prev => !prev)}>
-          {dataUser} <RiArrowDropDownLine style={{ cursor: 'pointer' }} />
+          {auth.user} <RiArrowDropDownLine style={{ cursor: 'pointer' }} />
           <PopupMenu drop={dropDown} callLogOut={(result) => handleLogout(result)} />
         </DropDownName>
         : 

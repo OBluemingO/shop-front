@@ -1,10 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// const token_init = window ? window.localStorage.getItem('token') : null
+const token_init = localStorage.getItem('token')
+  ? localStorage.getItem('token')
+  : null
+const username_init = localStorage.getItem('username')
+  ? localStorage.getItem('username')
+  : null
+
 const initialState = {
   modalLogin: false,
   isLogin: false,
-  token: null,
-  user: null,
+  token: token_init,
+  user: username_init,
 }
 
 const authSlice = createSlice({
@@ -18,7 +26,8 @@ const authSlice = createSlice({
       state.isLogin = payload
     },
     handleSetCredentials: (state, {payload}) => {
-      state.token = payload?.accessToken
+      state.token = payload.accessToken
+      state.user = payload.user
     },
     handleLogout: (state, {payload}) => {
       state.token = null

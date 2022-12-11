@@ -8,6 +8,9 @@ import { useLayoutEffect } from 'react'
 import Home from "./pages/Home"
 import Product from "./pages/Product"
 import Footer from "./components/Footer/Footer";
+import UserMange from "./pages/UserMange";
+import PrivateRoutes from "./utils/PrivateRoute";
+import Profile from "./pages/Profile";
 
 const Container = styled.div`
   max-width: 1440px;
@@ -25,6 +28,9 @@ function App() {
         <GlobalStyled />
         <NavHome />
         <Routes>
+          <Route element={<PrivateRoutes />}>
+                <Route path='/profile' element={<Profile />} />
+          </Route>
           <Route path="/" element={ <Home />} />
           <Route path="/Product" element={ <Product />} />
         </Routes>

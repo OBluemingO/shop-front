@@ -2,12 +2,10 @@ import styled, { css } from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, redirect, useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
 
 import {
   handleOpenModalLogin,
-  handleLogin,
-  handleActiveUser,
+  handleSetCredentials
 } from "../../feature/auth/authSlice";
 
 import axios from '../../axios/axios'
@@ -234,8 +232,6 @@ const ModalLogin = () => {
     }
   }, [ dataError ])
 
-  const navigate = useNavigate()
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if(usernameRef.current.value === '' || passwordRef.current.value === '') return
@@ -246,17 +242,18 @@ const ModalLogin = () => {
           }, 
           { withCredentials: true }
         )
-        window.localStorage.setItem('username', data.username )
         dispath(handleOpenModalLogin(false))
-        dispath(handleActiveUser(true))
-        navigate('product')
+        dispath(handleSetCredentials({accessToken: data?.accessToken, user: data?.username }))
         
+        // set localStore
+        window.localStorage.setItem('token',data?.accessToken)
+        window.localStorage.setItem('username',data?.username)
     } catch (err) {
       if(Object.keys(err.response?.data).length > 0){
         setDataError(true)
       }
     }
-  };
+  }
 
   return (
     <Container open={auth.modalLogin}>

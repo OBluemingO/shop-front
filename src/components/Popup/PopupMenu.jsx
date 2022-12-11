@@ -1,7 +1,7 @@
-import { useCookies } from "react-cookie";
 import styled from "styled-components";
-import axios from '../../axios/axios'
-
+import axios from "../../axios/axios";
+import { useDispatch } from "react-redux";
+import { handleSetCredentials } from "../../feature/auth/authSlice";
 
 const Container = styled.div`
   position: absolute;
@@ -26,23 +26,31 @@ const Menu = styled.div`
 `;
 
 const PopupMenu = ({ drop, callLogOut }) => {
-
-    const handleLogout = async() => {
-      try{
-        const { data } = await axios.post("auth/logout",{},{withCredentials:true})
-        callLogOut(true)
-      }catch(err) {
-        console.log(err,'=====');
-      }
+  const dispath = useDispatch()
+  const handleLogout = async () => {
+    try {
+      // clear local store
+      localStorage.clear();
+      dispath(handleSetCredentials({ accessToken: null, user:null }))
+      // clear cookie jwt
+      const { data } = await axios.post(
+        "auth/logout",
+        {},
+        { withCredentials: true }
+      );
+      callLogOut(true);
+    } catch (err) {
+      console.log(err, "=====");
     }
+  };
 
-    return (
-        <Container display={drop}>
-        <Menu>PopupMenu</Menu>
-        <Menu>PopupMenu</Menu>
-        <Menu onClick={handleLogout}>logout</Menu>
-        </Container>
-    );
+  return (
+    <Container display={drop}>
+      <Menu>PopupMenu</Menu>
+      <Menu>PopupMenu</Menu>
+      <Menu onClick={handleLogout}>logout</Menu>
+    </Container>
+  );
 };
 
 export default PopupMenu;
