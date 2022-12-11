@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   modalLogin: false,
   isLogin: false,
-  acc_token: null,
-  active_user: false,
+  token: null,
+  user: null,
 }
 
 const authSlice = createSlice({
@@ -18,13 +18,13 @@ const authSlice = createSlice({
       state.isLogin = payload
     },
     handleSetCredentials: (state, {payload}) => {
-      state.acc_token = payload?.accessToken
+      state.token = payload?.accessToken
     },
     handleLogout: (state, {payload}) => {
-      state.acc_token = null
+      state.token = null
     },
     handleActiveUser: (state, {payload}) => {
-      state.active_user = payload
+      state.user = payload
     }
   }
 })

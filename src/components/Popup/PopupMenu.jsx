@@ -28,14 +28,12 @@ const Menu = styled.div`
 const PopupMenu = ({ drop, callLogOut }) => {
 
     const handleLogout = async() => {
-        const { data } = await axios.post("auth/logout")
-        window.localStorage.removeItem('username')
+      try{
+        const { data } = await axios.post("auth/logout",{},{withCredentials:true})
         callLogOut(true)
-        // document.cookie = ''
-        // console.log(data,'======== after logout')
-        const mydate = new Date();
-        mydate.setTime(mydate.getTime() - 1);
-        document.cookie = "username=; expires=" + mydate.toGMTString(); 
+      }catch(err) {
+        console.log(err,'=====');
+      }
     }
 
     return (
