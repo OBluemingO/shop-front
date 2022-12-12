@@ -9,6 +9,7 @@ import {
 } from "../../feature/auth/authSlice";
 
 import axios from '../../axios/axios'
+import { convert_json } from "../../utils/convert_json";
 
 const Container = styled.div`
   background-color: var(--theme-primary);
@@ -196,6 +197,8 @@ const ModalLogin = () => {
   const dispath = useDispatch();
   const usernameRef = useRef(null)
   const passwordRef = useRef(null)
+  const formRegisterRef = useRef([])
+
 
   const modal = useRef(null);
   const [signUp, setSignUp] = useState(false);
@@ -255,6 +258,27 @@ const ModalLogin = () => {
     }
   }
 
+  const handleSubmitRegister = async (e) => {
+    e.preventDefault();
+    try {
+
+      const send_data = {
+        username: formRegisterRef[0].value + " " + formRegisterRef[1].value,
+        first_name: formRegisterRef[0].value,
+        last_name: formRegisterRef[1].value,
+        email: formRegisterRef[2].value,
+        password: formRegisterRef[3].value,
+      }
+
+      const { data } = await axios.post("register", convert_json(send_data))
+      console.log(data,'========= test test')
+      setSignUp(false)
+      
+    } catch(err) {
+      console.log(err,'======== err')
+    }
+  }
+
   return (
     <Container open={auth.modalLogin}>
       <Borad ref={modal} active={!signUp}>
@@ -307,31 +331,31 @@ const ModalLogin = () => {
                 account
               </TextBody>
             </WrapperText>
-            <WrapperInputGroups onSubmit={(e) => handleSubmit(e)} row>
+            <WrapperInputGroups onSubmit={(e) => handleSubmitRegister(e)} row>
               <WrapperInputContent row>
                 <GroupsName>
                   <label htmlFor="email">First Name</label>
                   <WrapperInput row>
-                    <Input type={"text"} placeholder="Enter your firstname" />
+                    <Input type={"text"} ref={ el => formRegisterRef[0] = el } placeholder="Enter your firstname" />
                   </WrapperInput>
                 </GroupsName>
                 <GroupsName>
                   <label htmlFor="email">Last Name</label>
                   <WrapperInput row>
-                    <Input type={"text"} placeholder="Enter your lastname" />
+                    <Input type={"text"} ref={ el => formRegisterRef[1] = el } placeholder="Enter your lastname" />
                   </WrapperInput>
                 </GroupsName>
               </WrapperInputContent>
               <WrapperInputContent signUp>
                 <label htmlFor="email">Email</label>
                 <WrapperInput>
-                  <Input placeholder="Enter your email address" />
+                  <Input placeholder="Enter your email address" ref={ el => formRegisterRef[2] = el } />
                 </WrapperInput>
                 <label htmlFor="password">Password</label>
                 <WrapperInput>
-                  <Input type={"password"} placeholder="Enter your password" />
+                  <Input type={"password"} placeholder="Enter your password" ref={ el => formRegisterRef[3] = el } />
                 </WrapperInput>
-                <Button signUp>Sign up</Button>
+                <Button signUp >Sign up</Button>
               </WrapperInputContent>
             </WrapperInputGroups>
           </WrapperGroups>

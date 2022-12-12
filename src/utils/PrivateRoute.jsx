@@ -4,7 +4,6 @@ import { useEffect } from "react";
 
 const PrivateRoutes = () => {
   const { auth } = useSelector((state) => state);
-  console.log(auth);
 
   useEffect(() => {
     const cookies = document.cookie.split(';').reduce(
@@ -13,7 +12,6 @@ const PrivateRoutes = () => {
             cookies[name] = val;
             return cookies;
         }, {});
-    console.log(Object.keys(cookies).length !== 0,'========', cookies)
   },[])
 
   return auth.token ? (

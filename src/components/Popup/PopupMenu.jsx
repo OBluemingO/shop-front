@@ -2,6 +2,7 @@ import styled from "styled-components";
 import axios from "../../axios/axios";
 import { useDispatch } from "react-redux";
 import { handleSetCredentials } from "../../feature/auth/authSlice";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   position: absolute;
@@ -26,18 +27,17 @@ const Menu = styled.div`
 `;
 
 const PopupMenu = ({ drop, callLogOut }) => {
-  const dispath = useDispatch()
+  const dispath = useDispatch();
   const handleLogout = async () => {
     try {
-      // clear local store
-      localStorage.clear();
-      dispath(handleSetCredentials({ accessToken: null, user:null }))
-      // clear cookie jwt
+      dispath(handleSetCredentials({ accessToken: null, user: null }));
+      const user = localStorage.getItem('username')
       const { data } = await axios.post(
         "auth/logout",
-        {},
+        {username: user},
         { withCredentials: true }
       );
+      localStorage.clear();
       callLogOut(true);
     } catch (err) {
       console.log(err, "=====");
@@ -46,7 +46,9 @@ const PopupMenu = ({ drop, callLogOut }) => {
 
   return (
     <Container display={drop}>
-      <Menu>PopupMenu</Menu>
+      <Link to={"user/account/profile"}>
+        <Menu>My Profile</Menu>
+      </Link>
       <Menu>PopupMenu</Menu>
       <Menu onClick={handleLogout}>logout</Menu>
     </Container>

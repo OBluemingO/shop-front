@@ -8,9 +8,12 @@ import { useLayoutEffect } from 'react'
 import Home from "./pages/Home"
 import Product from "./pages/Product"
 import Footer from "./components/Footer/Footer";
-import UserMange from "./pages/UserMange";
+
 import PrivateRoutes from "./utils/PrivateRoute";
 import Profile from "./pages/Profile";
+import Support from "./pages/Support";
+import Notification from "./pages/Notification";
+import History from "./pages/History";
 
 const Container = styled.div`
   max-width: 1440px;
@@ -29,7 +32,10 @@ function App() {
         <NavHome />
         <Routes>
           <Route element={<PrivateRoutes />}>
-                <Route path='/profile' element={<Profile />} />
+              <Route path='/user/account/profile' element={<Profile />} />
+              <Route path='/user/account/support' element={<Support />} />
+              <Route path='/user/account/history' element={<History />} />
+              <Route path='/user/account/notification' element={<Notification />} />
           </Route>
           <Route path="/" element={ <Home />} />
           <Route path="/Product" element={ <Product />} />

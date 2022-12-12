@@ -53,53 +53,18 @@ const DropDownName = styled.div`
 export const NavHome = () => {
   const menu_list = [`Home`,`Product`, `How It Work`, `Features`, `Pricing`, `FAQs`];
   const { auth } = useSelector(state => state)
-  const [dataUser, setDataUser] = useState(null)
   const [dropDown, setDropDown] = useState(false)
-  const [logout, setLogout] = useState(false)
+
   const dispath = useDispatch()
 
   const handleClickModal = () => {
     dispath(handleOpenModalLogin(true))
   }
   
-  // useEffect(() => {
-  //   try{
-  //     // const data_username = window.localStorage.getItem("username")
-  //     // setDataUser(data_username)
-  //     // dispath(handleLogin(true))
-  //     console.log(auth.token)
-  //   }
-  //   catch(err) {
-  //     throw err
-  //   }
-
-  //   if(logout){
-  //     dispath(handleActiveUser(false))
-  //     setDataUser(false)
-  //     setLogout(false)
-  //   }
-
-  // }, [auth.modalLogin, logout])
-
-  useEffect(() => {
-    const checkToken = async() => {
-      try{
-        // console.log(auth,'=====')
-      }
-      catch(err) {
-        console.log('first',err)
-      }
-    }
-    
-    checkToken()
-
-  },[auth, logout])
-
   const handleLogout = (result) => {
-    setLogout(result)
+    // setLogout(result)
+    console.log('will remove soon')
   }
-
-  console.log(auth,'===')
 
   return (
     <WrapperMenu>
