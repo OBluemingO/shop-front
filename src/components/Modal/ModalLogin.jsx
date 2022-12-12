@@ -247,10 +247,6 @@ const ModalLogin = () => {
         )
         dispath(handleOpenModalLogin(false))
         dispath(handleSetCredentials({accessToken: data?.accessToken, user: data?.username }))
-        
-        // set localStore
-        window.localStorage.setItem('token',data?.accessToken)
-        window.localStorage.setItem('username',data?.username)
     } catch (err) {
       if(Object.keys(err.response?.data).length > 0){
         setDataError(true)
@@ -271,7 +267,6 @@ const ModalLogin = () => {
       }
 
       const { data } = await axios.post("register", convert_json(send_data))
-      console.log(data,'========= test test')
       setSignUp(false)
       
     } catch(err) {

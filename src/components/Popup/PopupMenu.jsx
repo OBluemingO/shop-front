@@ -31,14 +31,11 @@ const PopupMenu = ({ drop, callLogOut }) => {
   const handleLogout = async () => {
     try {
       dispath(handleSetCredentials({ accessToken: null, user: null }));
-      const user = localStorage.getItem('username')
       const { data } = await axios.post(
         "auth/logout",
         {username: user},
         { withCredentials: true }
       );
-      localStorage.clear();
-      callLogOut(true);
     } catch (err) {
       console.log(err, "=====");
     }

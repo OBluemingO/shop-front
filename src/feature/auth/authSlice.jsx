@@ -8,11 +8,15 @@ const username_init = localStorage.getItem('username')
   ? localStorage.getItem('username')
   : null
 
+const PersistRaw = localStorage.getItem('persist') ? JSON.parse(localStorage.getItem('persist')) : false
+
 const initialState = {
   modalLogin: false,
   isLogin: false,
   token: token_init,
   user: username_init,
+  auth: {},
+  persist: PersistRaw
 }
 
 const authSlice = createSlice({

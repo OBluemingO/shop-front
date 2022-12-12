@@ -9,7 +9,7 @@ import Home from "./pages/Home"
 import Product from "./pages/Product"
 import Footer from "./components/Footer/Footer";
 
-import PrivateRoutes from "./utils/PrivateRoute";
+import Persistent from "./components/Auth/Persistent";
 import Profile from "./pages/Profile";
 import Support from "./pages/Support";
 import Notification from "./pages/Notification";
@@ -31,12 +31,13 @@ function App() {
         <GlobalStyled />
         <NavHome />
         <Routes>
-          <Route element={<PrivateRoutes />}>
+          <Route element={<Persistent />}>
               <Route path='/user/account/profile' element={<Profile />} />
               <Route path='/user/account/support' element={<Support />} />
               <Route path='/user/account/history' element={<History />} />
               <Route path='/user/account/notification' element={<Notification />} />
           </Route>
+
           <Route path="/" element={ <Home />} />
           <Route path="/Product" element={ <Product />} />
         </Routes>
