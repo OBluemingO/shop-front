@@ -27,17 +27,24 @@ const authSlice = createSlice({
       state.modalLogin = payload
     },
     handleLogin: (state, {payload}) => {
+      // ! remove
       state.isLogin = payload
     },
     handleSetCredentials: (state, {payload}) => {
+      // ! remove
       state.token = payload.accessToken
       state.user = payload.user
     },
     handleLogout: (state, {payload}) => {
+      // ! remove
       state.token = null
     },
     handleActiveUser: (state, {payload}) => {
+      // ! remove
       state.user = payload
+    },
+    handleAuth: (state, { payload }) => {
+      state.auth = payload
     }
   }
 })
@@ -47,7 +54,8 @@ export const {
   handleLogin,
   handleSetCredentials,
   handleLogout,
-  handleActiveUser
+  handleActiveUser,
+  handleAuth
 } = authSlice.actions;
 
 export default authSlice.reducer;
