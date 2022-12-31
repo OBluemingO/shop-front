@@ -23,6 +23,7 @@ const Container = styled.div`
   place-items: center;
   user-select: none;
   overflow: hidden;
+  z-index:5000;
 `;
 
 const Borad = styled.div`

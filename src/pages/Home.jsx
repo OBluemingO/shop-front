@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   HomeSectionOne,
   HomeSectionDuplicate,
@@ -8,12 +9,18 @@ import {
 
 const Home = () => {
 
+  useEffect(() => {
+    
+    window.scrollTo({top:0})
+
+  },[])
+
   return (
     <>
       <HomeSectionOne />
       <HomeSectionDuplicate />
       <HomeSectionThird />
-      <HomeSectionDuplicate />
+      <HomeSectionDuplicate popular={'true'} />
       <HomeSectionFour />
       <HomeSectionFive />
     </>

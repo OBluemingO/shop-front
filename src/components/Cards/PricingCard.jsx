@@ -5,9 +5,11 @@ const Container = styled.div`
     /* height: 505px; */
     height: 372px;
     width: 340px;
-    background-color: aqua;
+    background-color: ${({mode}) => mode === 'Normal' ? `black` : `white`};
+    color: ${({mode}) => mode === 'Normal' ? `white` : `black`};
     border-radius: 30px;
     z-index: 300;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
 `
 
 const WrapperContent = styled.div`
@@ -30,6 +32,9 @@ const GroupsList = styled.ul`
   list-style: none;
   padding: 0;
   line-height: 1.75;
+  li{
+    color: ${({mode}) => mode === 'Normal' ? `#777777` : `black`};
+  }
 `
 
 const WrapperButton = styled.div`
@@ -42,28 +47,29 @@ const WrapperButton = styled.div`
 const ChildrenList = styled.li`
 `
 
+
 const TextPricing = styled.h1`
   margin: 0;
   margin-top: 2px;
 
 `
 
-const PricingCard = () => {
+const PricingCard = ({price, mode}) => {
   return (
-    <Container>
+    <Container mode={mode}>
       <WrapperContent>
-        <TextHeader>test</TextHeader>
-        <TextBody>test</TextBody>
-        <TextPricing>$00</TextPricing>
-        <GroupsList>
-          <ChildrenList>Lorem ipsum dolor sit amet.</ChildrenList>
-          <ChildrenList>Lorem ipsum dolor sit amet.</ChildrenList>
-          <ChildrenList>Lorem ipsum dolor sit amet.</ChildrenList>
-          <ChildrenList>Lorem ipsum dolor sit amet.</ChildrenList>
-          <ChildrenList>Lorem ipsum dolor sit amet.</ChildrenList>
+        <TextHeader>{mode}</TextHeader>
+        <TextBody>1 month for free</TextBody>
+        <TextPricing>${price}</TextPricing>
+        <GroupsList mode={mode}>
+          <ChildrenList>No actnakiln tees</ChildrenList>
+          <ChildrenList>No hidden costs ti</ChildrenList>
+          <ChildrenList>No revenue based noting</ChildrenList>
+          <ChildrenList>Unliked orders included</ChildrenList>
+          <ChildrenList>(fair use) = Only Smartphone</ChildrenList>
         </GroupsList>
         <WrapperButton >
-          <ButtonRound width={`50%`} >Get Started</ButtonRound>
+          <ButtonRound width={`50%`} bgColor={mode === 'Normal' && 'true'} >Get Started</ButtonRound>
         </WrapperButton>
       </WrapperContent>
     </Container>

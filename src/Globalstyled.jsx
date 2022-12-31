@@ -14,5 +14,26 @@ export const GlobalStyled = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'Rubik', sans-serif;
+    user-select: none;
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #FB9300; 
+      border-radius: 50px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #be6f00; 
+    }
   }
-`
+`;

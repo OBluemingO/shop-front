@@ -1,5 +1,5 @@
 import styled, {css} from "styled-components";
-import { media_size } from "../../../utils/media_queries";
+import { device } from "../../../utils/media_queries";
 
 const ContainerThird = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const ContainerThird = styled.div`
 const LineDetechItem = styled.div`
   height: ${({height}) => height ? `${height}` : `100%`};
   width: 1.5%;
-  right: -20%;
+  right: -10%;
   border-radius: 20px;
   position: absolute;
   top: 0;
@@ -26,12 +26,14 @@ const WrapperContentSectionThrid = styled.div`
   height: 50%;
   display: ${({center}) => center ? `flex` : `block`};
   justify-content: ${({center}) => center && `center`};
-
+  
   ${({left}) => left ? css`
-    width:35%;
+    width:40%;
+    /* padding-left: 10%; */
   ` : css`
-    width:65%;
+    width:60%;
     /* padding-left: 15%; */
+    z-index: 0;
     transform:translateX(5%);
   `}
 `
@@ -83,8 +85,6 @@ const CircleIndex = styled.div`
 `
 
 const WrapperContentImage = styled.div`
-  /* height: ${({ height }) => (height ? `80%` : `600px`)};
-  width: ${({ width }) => (width ? `28%` : `500px`)}; */
   height: ${({ height }) => (height ? height : `600px`)};
   width: ${({ width }) => (width ? width : `500px`)};
   border-radius: ${({ round }) => round && `100%`};
@@ -97,21 +97,31 @@ const WrapperContentImage = styled.div`
 const ImageSrc = styled.img`
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 `;
 
 const WrapperWave = styled.div`
   position: absolute;
-  top: ${({rotation}) => rotation ? `-75%`: `-45%`};
+  top: ${({rotation}) => rotation ? `-65%`: `-54%`};
+  /* top: ${({rotation}) => rotation ? `clamp(-64%, -75%, -85%)`: `clamp(-50%, -30%, -20%)`}; */
   left: 0;
   rotate: ${({rotation}) => rotation ? `180deg`: `0deg`};
   height: 100%;
   width: 100%;
+  z-index:1;
+
+  @media (max-width: 1600px) {
+    top: ${({rotation}) => rotation ? `-80%`: `-52%`};
+  }
+
+  @media ${device.laptopL} {
+    top: ${({rotation}) => rotation ? `-80%`: `-45%`};
+  }
 `
 
 const WrapperIcon = styled.div`
   position: absolute;
-  bottom: -55%;
+  bottom: 0%;
   right:0;
 `
 

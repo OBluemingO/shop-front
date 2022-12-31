@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Container = styled.div`
   height: 108vh;
   max-height: 870px;
-  padding-top: 15%;
+  padding-top: 5%;
   background-color: var(--bg-color);
   position: relative;
 `;
@@ -29,10 +29,19 @@ const WrapperCard = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0 20%;
+  max-width: 780px;
+  margin: 0 auto;
+`
+
+const WrapperLottie = styled.div`
+  position: absolute;
+  top: -12%;
+  right: 10%;
 `
 
 export {
   Container,
   BackgroundContainer,
-  WrapperCard
+  WrapperCard,
+  WrapperLottie
 }

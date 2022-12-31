@@ -12,8 +12,13 @@ const WrapperMenu = styled.div`
   height: 7.5%;
   justify-content: space-between;
   align-items: center;
-  padding: 2% 5% 0 5%;
+  padding: 1% 5%;
   background-color: var(--bg-color);
+  position: ${({clone}) => clone && `fixed`};
+  width: ${({clone}) => clone && `90%`};
+  z-index: 3000;
+  top: ${({clone}) => clone && `0`};
+  /* top: ${({clone}) => clone && `0`}; */
 `;
 
 const GroupsMenu = styled.div`
@@ -50,7 +55,7 @@ const DropDownName = styled.div`
   position: relative;
 `
 
-export const NavHome = () => {
+export const NavHome = ({clone}) => {
   const menu_list = [`Home`,`Product`, `How It Work`, `Features`, `Pricing`, `FAQs`];
   const { auth } = useSelector(state => state)
   const [dropDown, setDropDown] = useState(false)
@@ -67,7 +72,7 @@ export const NavHome = () => {
   }
 
   return (
-    <WrapperMenu>
+    <WrapperMenu clone={clone}>
       <GroupsMenu>
         <Brand> Foody </Brand>
         {

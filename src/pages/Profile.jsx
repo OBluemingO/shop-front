@@ -73,7 +73,7 @@ const Profile = () => {
           withCredentials: true,
         })
         setData(resData[0])
-        console.log(resData[0])
+        // console.log(resData[0])
         
       }catch(err) {
         console.log(err,'=========== respon err ')

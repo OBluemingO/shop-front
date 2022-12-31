@@ -14,13 +14,23 @@ const WrapperText = styled.div`
 `;
 
 const TextTitle = styled.h1`
-  margin: 0;
+  margin: ${({size}) => !size ? `20px 0 0 0` : `5px 0 0 0` } ;
+  white-space: pre-line;
+  /* background-color: black; */
+  font-size: ${({size}) => size && `${size}rem`};
+  text-align: ${({popular}) => popular && `center`};
 `;
 
 const TextDesc = styled.p`
   width: 50%;
   text-align: center;
 `;
+
+const WrapperIconHeart = styled.div`
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+`
 
 const WrapperImageGroup = styled.div`
   display: flex;
@@ -39,17 +49,15 @@ const WrapperCard = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  /* box-shadow: ${({ shadow }) =>
-    shadow && `0px 8px 6px 5px rgba(0,0,0,0.21)`}; */
-  box-shadow: 0px 8px 6px 5px rgba(0, 0, 0, 0.21);
+  text-align: ${({popular}) => !popular && 'center'};
+  width: 300px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
   scale: ${({ shadow }) => (shadow ? `1` : `0.9`)};
 `;
 
 const ImageWrapper = styled.div`
-  max-width: 240px;
-  max-height: 225px;
-  height: 100%;
+  padding-top: 5%;
+  height: 40%;
   width: 100%;
 `;
 
@@ -61,6 +69,21 @@ const ImageSrc = styled.img`
 
 const TextDetail = styled.p``;
 
+const WrapperIcon = styled.div`
+  display: flex;
+  gap: 2px;
+  margin-top: 15px;
+`;
+
+const WrapperCardContent = styled.div`
+  padding: 0 10%;
+`
+
+const WrapperPrice = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`
 
 export {
   ContainerSectionMuti,
@@ -71,5 +94,9 @@ export {
   WrapperCard,
   ImageWrapper,
   ImageSrc,
-  TextDetail
+  TextDetail,
+  WrapperIcon,
+  WrapperCardContent,
+  WrapperPrice,
+  WrapperIconHeart
 }
