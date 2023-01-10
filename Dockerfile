@@ -1,4 +1,4 @@
-FROM node:14-alpine
+FROM node:18-alpine
 
 WORKDIR /front_app
 
@@ -8,6 +8,5 @@ COPY . .
 
 RUN yarn install && yarn build
 
-
-EXPOSE 3000
-CMD ["yarn", "start"]
+EXPOSE 5173
+CMD ["yarn", "dev","--","--host"]
